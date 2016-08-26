@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Syncfusion.SfKanban.UWP</name>
+    </assembly>
+    <members>
+        <member name="T:Syncfusion.UI.Xaml.Kanban.KanbanColumnsCollection">
+            <summary>
+            A Collection that holds the kanban columns
+            </summary>
+        </member>
+        <member name="M:Syncfusion.UI.Xaml.Kanban.IKanbanDataManager.CreateRecords">
+            <summary>
+            To create the kanban records.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Syncfusion.UI.Xaml.Kanban.KanbanCardItem.BoundRect">
+            <summary>
+            Returns the bounds of a card.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.SfKanban.UWP.Syncfusion_SfKanban_UWP_2015_XamlTypeInfo.XamlMetaDataProvider.GetXamlType(System.Type)">
+            <summary>
+            GetXamlType(Type)
+            </summary>
+        </member>
+        <member name="M:Syncfusion.SfKanban.UWP.Syncfusion_SfKanban_UWP_2015_XamlTypeInfo.XamlMetaDataProvider.GetXamlType(System.String)">
+            <summary>
+            GetXamlType(String)
+            </summary>
+        </member>
+        <member name="M:Syncfusion.SfKanban.UWP.Syncfusion_SfKanban_UWP_2015_XamlTypeInfo.XamlMetaDataProvider.GetXmlnsDefinitions">
+            <summary>
+            GetXmlnsDefinitions()
+            </summary>
+        </member>
+    </members>
+</doc>

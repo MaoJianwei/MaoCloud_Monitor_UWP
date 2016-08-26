@@ -29,7 +29,7 @@ namespace MaoCloud
             this.nodeBroadcastInfoViewModel = new NodeBroadcastInfoViewModel();
         }
 
-        private async void ChangeFullScreen(object sender, ManipulationCompletedRoutedEventArgs e)
+        private void ChangeFullScreen(object sender, ManipulationCompletedRoutedEventArgs e)
         {
             //await new MessageDialog("getgetget!\n", "getgetget").ShowAsync();
             if (e.Cumulative.Expansion > 50)
