@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Windows.ApplicationModel.Core;
 using Windows.Networking.Sockets;
@@ -20,7 +21,7 @@ namespace MaoCloud
     {
         private DatagramSocket socket;
         public NodeBroadcastInfoViewModel nodeBroadcastInfoViewModel { get; set; }
-
+        private Dictionary<string, MaoNode> NodeTable = new Dictionary<string, MaoNode>();
 
         public MainPage()
         {
@@ -73,52 +74,64 @@ namespace MaoCloud
             StreamReader reader = new StreamReader(args.GetDataStream().AsStreamForRead());
             string data = reader.ReadToEnd();
 
-
-            string ip;
-            double cpuTemp;
-            double gpuTemp;
-            string name;
-            int count;
-            ParseData(ref data, out ip, out cpuTemp, out gpuTemp, out name, out count);
-            NodeBroadcastInfo nodeInfo1 = new NodeBroadcastInfo(ref ip, ref cpuTemp, ref gpuTemp, (name + "1"), ref count);
-            NodeBroadcastInfo nodeInfo2 = new NodeBroadcastInfo(ref ip, ref cpuTemp, ref gpuTemp, (name + "222"), ref count);
-            NodeBroadcastInfo nodeInfo3 = new NodeBroadcastInfo(ref ip, ref cpuTemp, ref gpuTemp, (name + "333333"), ref count);
+            NodeBroadcastInfo nodeInfo = ParseData(ref data);
 
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, new DispatchedHandler(() =>
             {
-                nodeBroadcastInfoViewModel.updateNode(nodeInfo1);
-                nodeBroadcastInfoViewModel.updateNode(nodeInfo2);
-                nodeBroadcastInfoViewModel.updateNode(nodeInfo3);
+                nodeBroadcastInfoViewModel.updateNode(nodeInfo);
             }));
 
+            if (NodeTable.ContainsKey(nodeInfo.Name))
+            {
+                MaoNode node = NodeTable[nodeInfo.Name];
+                if(node.IP != nodeInfo.IP)
+                {
+                    node.updateIP(nodeInfo.IP);
+                }
+                node.seeAgain();
+            }
+            else
+            {
+                NodeTable.Add(nodeInfo.Name, new MaoNode(nodeInfo.Name, nodeInfo.IP));
+            }
 
-            //await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High, new DispatchedHandler(() =>
-            //{
-            //    BroadcastReport.Text = data.Replace(";", "\n");
-            //    CountText.Text = (int.Parse(CountText.Text) + 1).ToString();
-            //}));
         }
-        private void ParseData(ref string data, out string ip, out double cpuTemp, out double gpuTemp, out string name, out int count)
+        private NodeBroadcastInfo ParseData(ref string data)
         {
-            ip = "";
-            cpuTemp = 0;
-            gpuTemp = 0;
-            name = "";
-            count = 0;
+            NodeBroadcastInfo.Builder nodeBroadcastInfoBuilder = NodeBroadcastInfo.builder();
+
             string[] dataSet = data.Split(';');
             foreach (string s in dataSet)
             {
                 string[] pair = s.Split('=');
                 switch (pair[0])
                 {
-                    case "IP": ip = pair[1]; break;
-                    case "CPU_Temp": cpuTemp = double.Parse(pair[1]); break;
-                    case "GPU_Temp": gpuTemp = double.Parse(pair[1]); break;
-                    case "NodeName": name = pair[1]; break;
-                    case "Count": count = int.Parse(pair[1]); break;
-                }
+                    case "IP": nodeBroadcastInfoBuilder.IP(pair[1]); break;
+                    case "CPU_Temp": nodeBroadcastInfoBuilder.CpuTemp(double.Parse(pair[1])); break;
+                    case "GPU_Temp": nodeBroadcastInfoBuilder.GpuTemp(double.Parse(pair[1])); break;
 
+                    case "Count": nodeBroadcastInfoBuilder.Count(int.Parse(pair[1])); break;
+                    case "SysTime": nodeBroadcastInfoBuilder.SysTime(pair[1]); break;
+                    case "NodeName": nodeBroadcastInfoBuilder.Name(pair[1]); break;
+
+                    case "GPS":
+                        string[] gpsDataList = pair[1].Split(',');
+                        if (!gpsDataList[0].Equals("lost"))
+                        {
+                            nodeBroadcastInfoBuilder.Latitude(double.Parse(gpsDataList[0]));
+                        }
+                        if (!gpsDataList[1].Equals("lost"))
+                        {
+                            nodeBroadcastInfoBuilder.Longitude(double.Parse(gpsDataList[1]));
+                        }
+                        nodeBroadcastInfoBuilder.Satellite(int.Parse(gpsDataList[2]));
+                        break;
+
+                    case "GpsTime": nodeBroadcastInfoBuilder.GpsTime(pair[1]); break;
+                    case "Temperature": nodeBroadcastInfoBuilder.EnvTemp(double.Parse(pair[1])); break;
+                }
             }
+            return nodeBroadcastInfoBuilder.build();
         }
     }
 }

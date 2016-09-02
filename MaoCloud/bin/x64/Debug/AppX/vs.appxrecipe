@@ -28,13 +28,13 @@
     <AppXManifest Include="D:\桌面C++系列\MaoCloudUWP\MaoCloud\MaoCloud\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-08-26T14:48:46.671</Modified>
+      <Modified>2016-09-02T11:57:59.384</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\桌面C++系列\MaoCloudUWP\MaoCloud\MaoCloud\bin\x64\Debug\MaoCloud.exe">
       <PackagePath>entrypoint\MaoCloud.exe</PackagePath>
-      <Modified>2016-08-26T14:46:34.989</Modified>
+      <Modified>2016-09-02T11:57:56.789</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Syncfusion\Essential Studio\14.2.0.28\Universal Windows\10.0\SDK\References\CommonConfiguration\neutral\Syncfusion.Calculate.UWP.dll">
       <PackagePath>Syncfusion.Calculate.UWP.dll</PackagePath>
@@ -4076,11 +4076,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\桌面C++系列\MaoCloudUWP\MaoCloud\MaoCloud\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-08-26T14:48:45.940</Modified>
+      <Modified>2016-09-02T11:48:13.195</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\桌面C++系列\MaoCloudUWP\MaoCloud\MaoCloud\bin\x64\Debug\Core\MaoCloud.exe">
       <PackagePath>MaoCloud.exe</PackagePath>
-      <Modified>2016-08-26T14:48:46.663</Modified>
+      <Modified>2016-09-02T11:57:59.378</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
