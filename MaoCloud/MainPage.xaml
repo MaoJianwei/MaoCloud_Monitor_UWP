@@ -16,16 +16,15 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Button x:Name="button" Content="StartUDP" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Click="DoRecv"/>
         <Button x:Name="button1" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Content="button"/>
         <Button x:Name="button2" Content="Button" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch"/>
-        <TextBlock x:Name="textBlock" Grid.Column="2" TextWrapping="Wrap" Text="TextBlock"/>
 
-        <Grid:SfDataGrid Grid.ColumnSpan="2" ItemsSource="{x:Bind Path=nodeBroadcastInfoViewModel.NodeBroInfos}"/>
+        <Grid:SfDataGrid Grid.ColumnSpan="3" ItemsSource="{x:Bind Path=nodeBroadcastInfoViewModel.NodeBroInfos}"/>
 
     </Grid>
 </Page>

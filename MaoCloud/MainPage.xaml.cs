@@ -62,11 +62,11 @@ namespace MaoCloud
                 socket = new DatagramSocket();
                 socket.MessageReceived += RecvData;
                 await socket.BindServiceNameAsync("7181");
-                await new MessageDialog("socket open !\n" + socket.ToString(), "QINGDAO-well-done").ShowAsync();
+                await new MessageDialog("Radar is ready !").ShowAsync();
             }
             else
             {
-                await new MessageDialog("socket ready\n" + socket.ToString(), "QINGDAO-socket-ready").ShowAsync();
+                await new MessageDialog("Radar has been online !").ShowAsync();
             }
         }
         private async void RecvData(DatagramSocket socket, DatagramSocketMessageReceivedEventArgs args)
